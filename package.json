@@ -1,0 +1,16 @@
+{
+  "name": "multimedia_platform",
+  "version": "1.0.0",
+  "description": "project related to multimedia platform",
+  "keywords": [
+    "javascript",
+    "backend"
+  ],
+  "license": "ISC",
+  "author": "Shudhansu Pandey",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
