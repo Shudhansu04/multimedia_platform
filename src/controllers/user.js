@@ -10,7 +10,7 @@ import ApiResponse from "../utils/ApiResponse.js";
 const registerUser = asyncHandler(async (req, res) => {
     //get users details...
     const { fullname, email, username, password } = req.body;
-
+ 
 
     //validation of provided information
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -38,13 +38,17 @@ const registerUser = asyncHandler(async (req, res) => {
 
     // check whether media is given or not by the users
     const avatarLocalPath = req.files?.avatar[0]?.path;
-    const coverImageLocalPath = req.files?.coverImage[0]?.path
+    let coverImageLocalPath;
+    if(req.files && Array.isArray(req.files.coverImage) && req.files.coverImage.length>0){
+    coverImageLocalPath=req.files.coverImage[0].path
+
+    }
     if (!avatarLocalPath) {
         throw new ApiError(408, "Please upload valid image")
     }
     //upload them to cloudinary
-    const avatar = await upload(avatarLocalPath);
-    const coverImage = await upload(coverImageLocalPath)
+    const avatar = await uploadFile(avatarLocalPath);
+    const coverImage = await uploadFile(coverImageLocalPath)
 
     if (!avatar) {
         throw new ApiError(404, "Avatar file is required")
@@ -61,16 +65,16 @@ const registerUser = asyncHandler(async (req, res) => {
     // remove password and refresh token from json response 
     const createdUser = await User.findById(user._id).select("-password -refreshToken");
 
-    
+
     // check whether user is created or not 
 
     if (!createdUser) {
         throw new ApiError(500, "something went wrong while registering the user ")
     }
     //return response.
-     return res.status(200).json(
-        new ApiResponse(200,createdUser , "Successfully registered")
-     )
+    return res.status(200).json(
+        new ApiResponse(200, createdUser, "Successfully registered")
+    )
 })
 
 export default registerUser;
