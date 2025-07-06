@@ -14,12 +14,15 @@ const uploadFile = async function (path) {
             public_id: "uploaded_image" + Date.now(),
             resource_type: "auto"
         })
-        fs.unlinkSync(path)
+        if (fs.existsSync(path)) {
+            fs.unlinkSync(path);
+        }
         return result;
 
     } catch (error) {
-        fs.unlinkSync(path);
-        console.log("error", error);
+        if(fs.existsSync(path)) {
+            fs.unlinkSync(path);
+        }
         throw error;
     }
 }

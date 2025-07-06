@@ -1,15 +1,15 @@
 const asyncHandler = (requestHandler) => {
     return async (req, res, next) => {
         try {
-            await requestHandler(req, res, next)
+            await requestHandler(req, res, next);
         } catch (error) {
-            await res.status(error.code || 500).json({
+            const statusCode = typeof error.code === "number" ? error.code : 500;
+            res.status(statusCode).json({
                 success: false,
-                message: error.message
-            })
+                message: error.message || "Something went wrong"
+            });
         }
-
-    }
-}
+    };
+};
 
 export default asyncHandler;

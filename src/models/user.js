@@ -46,7 +46,7 @@ const userSchema = new Schema({
         type: String,
         required: [true, "password required"]
     },
-    refreshTokens: {
+    refreshToken: {
         type: String
     }
 }, { timestamps: true })
@@ -73,7 +73,7 @@ userSchema.methods.generateAccessToken = function(){
         username:this.username,
         fullname:this.fullname
     },
-    process.nextTick.ACCESS_TOKEN_SECRET,
+    process.env.ACCESS_TOKEN_SECRET,
     {
         expiresIn:process.env.ACCESS_TOKEN_EXPIRY
     }
@@ -86,7 +86,7 @@ return jwt.sign(
         _id:this._id,
         
     },
-    process.nextTick.REFRESH_TOKEN_SECRET,
+    process.env.REFRESH_TOKEN_SECRET,
     {
         expiresIn:process.env.REFRESH_TOKEN_EXPIRY
     }
