@@ -5,6 +5,10 @@ import cookieParser from "cookie-parser";
 
 const app = express();
 
+app.get("/", (req, res) => {
+  res.send("Welcome to the Multimedia Platform API!");
+});
+
 app.use(cors({
     origin : process.env.CORS_ORIGIN,
     credentials : true
