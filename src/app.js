@@ -36,7 +36,7 @@ import videoRouter from "./routes/video.js"
 import commentRouter from "./routes/comments.js"
 import likeRouter from "./routes/like.js"
 import playlistRouter from "./routes/playlist.js"
-import dashboardRouter from "./routes/channel.js"
+import channelRouter from "./routes/channel.js"
 
 
 // routes declaration
@@ -48,6 +48,6 @@ app.use("/api/v1/videos",videoRouter)
 app.use("/api/v1/comments",commentRouter)
 app.use("/api/v1/likes",likeRouter)
 app.use("/api/v1/playlists",playlistRouter)
-app.use("/api/v1/dashboard",dashboardRouter)
+app.use("/api/v1/channel",channelRouter)
 
 export default app;

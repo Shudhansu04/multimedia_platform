@@ -1,9 +1,8 @@
 import mongoose from "mongoose";
 import { Comment } from "../models/comment.js";
-import ApiError from "../utils/ApiError.js";
-import ApiResponse from "../utils/ApiResponse.js";
-import asyncHandler from "../utils/asyncHandler.js";
-
+import ApiError  from "../utils/ApiError.js";
+import  ApiResponse  from "../utils/ApiResponse.js";
+import  asyncHandler  from "../utils/asyncHandler.js";
 
 const getVideoComments = asyncHandler(async (req, res) => {
     const { videoId } = req.params;
@@ -14,32 +13,31 @@ const getVideoComments = asyncHandler(async (req, res) => {
         {
             $lookup: {
                 from: "users",
-                localField: "user",
+                localField: "owner",
                 foreignField: "_id",
-                as: "user",
-            },
+                as: "owner"
+            }
         },
-        { $unwind: "$user" },
+        { $unwind: "$owner" },
         {
             $project: {
                 content: 1,
                 createdAt: 1,
-                "user._id": 1,
-                "user.fullname": 1,
-                "user.username": 1,
-                "user.avatar": 1,
-            },
+                "owner._id": 1,
+                "owner.fullname": 1,
+                "owner.username": 1,
+                "owner.avatar": 1
+            }
         },
         { $sort: { createdAt: -1 } }
     ])
         .skip((page - 1) * limit)
         .limit(Number(limit));
 
-    return res
-        .status(200)
-        .json(new ApiResponse(200, comments, "Comments fetched successfully"));
+    return res.status(200).json(
+        new ApiResponse(200, comments, "Comments fetched successfully")
+    );
 });
-
 
 const addComment = asyncHandler(async (req, res) => {
     const { videoId } = req.params;
@@ -52,14 +50,13 @@ const addComment = asyncHandler(async (req, res) => {
     const comment = await Comment.create({
         content,
         video: videoId,
-        user: req.user._id,
+        owner: req.user._id
     });
 
     return res
         .status(201)
         .json(new ApiResponse(201, comment, "Comment added successfully"));
 });
-
 
 const updateComment = asyncHandler(async (req, res) => {
     const { commentId } = req.params;
@@ -70,7 +67,7 @@ const updateComment = asyncHandler(async (req, res) => {
         throw new ApiError(404, "Comment not found");
     }
 
-    if (comment.user.toString() !== req.user._id.toString()) {
+    if (comment.owner.toString() !== req.user._id.toString()) {
         throw new ApiError(403, "Unauthorized to edit this comment");
     }
 
@@ -90,7 +87,7 @@ const deleteComment = asyncHandler(async (req, res) => {
         throw new ApiError(404, "Comment not found");
     }
 
-    if (comment.user.toString() !== req.user._id.toString()) {
+    if (comment.owner.toString() !== req.user._id.toString()) {
         throw new ApiError(403, "Unauthorized to delete this comment");
     }
 
