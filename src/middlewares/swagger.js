@@ -12,6 +12,10 @@ const swaggerDefinition = {
       url: "http://localhost:8000/api/v1",  
       description: "Development Server",
     },
+    {
+    url: "https://multimedia-platform.onrender.com",
+    description: "Production Server",
+  },
   ],
   components: {
     securitySchemes: {
