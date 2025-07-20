@@ -1,3 +1,7 @@
 # multimedia platform
 
-- [Model link](https://app.eraser.io/workspace/YtPqZ1VogxGy1jzIDkzj?origin=share)
+A backend project based on the server of social media platforms
+
+## Live Server's Link
+
+https://multimedia-platform.onrender.com/api-docs/
