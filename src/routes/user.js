@@ -37,6 +37,8 @@ const router = Router();
  *           schema:
  *             type: object
  *             properties:
+ *               fullname:
+ *                 type: string
  *               username:
  *                 type: string
  *               email:

@@ -13,7 +13,7 @@ const swaggerDefinition = {
       description: "Development Server",
     },
     {
-    url: "https://multimedia-platform.onrender.com",
+    url: "https://multimedia-platform.onrender.com/api/v1",
     description: "Production Server",
   },
   ],
