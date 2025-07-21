@@ -1,19 +1,18 @@
 import { Router } from "express";
 import {
-  registerUser,
-  loginUser,
-  loggedOutUser,
-  refreshAccessToken,
   changeCurrentPassword,
   getCurrentUser,
-  updateAccountDetails,
-  updateAvatar,
-  updateCoverImage,
   getUserChannelProfile,
   getWatchHistory,
+  loggedOutUser,
+  loginUser,
+  refreshAccessToken,
+  updateAccountDetails,
+  updateAvatar,
+  updateCoverImage
 } from "../controllers/user.js";
-import { upload } from "../middlewares/multer.js";
 import { verifyJWT } from "../middlewares/auth.js";
+import { upload } from "../middlewares/multer.js";
 
 const router = Router();
 
@@ -25,11 +24,14 @@ const router = Router();
  */
 
 /**
+ * /**
  * @swagger
  * /users/register:
  *   post:
  *     summary: Register a new user
- *     tags: [Users]
+ *     tags:
+ *       - Users
+ *       - Auth
  *     requestBody:
  *       required: true
  *       content:
@@ -55,26 +57,16 @@ const router = Router();
  *       201:
  *         description: User registered successfully
  */
-router.route("/register").post(
-  upload.fields([
-    {
-      name: "avatar",
-      maxCount: 1,
-    },
-    {
-      name: "coverImage",
-      maxCount: 1,
-    },
-  ]),
-  registerUser
-);
+
 
 /**
  * @swagger
  * /users/login:
  *   post:
  *     summary: Log in a user
- *     tags: [Users]
+ *     tags:
+ *       - Users
+ *       - Auth
  *     requestBody:
  *       required: true
  *       content:
