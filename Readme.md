@@ -77,7 +77,7 @@ CORS_ORIGIN=*
 ---
 
 ## Folder Structure
-
+```
 .
 ├── controllers/       # Route logic
 ├── middlewares/       # Auth, error handling, file upload
@@ -87,6 +87,6 @@ CORS_ORIGIN=*
 ├── .env.example       # Sample env file
 ├── index.js          # Entry point
 └── README.md
-
+```
 
  
