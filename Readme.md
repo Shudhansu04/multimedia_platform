@@ -6,15 +6,20 @@ This is the backend for a full-stack **Multimedia Sharing Platform**, built with
 
 ##  Live API
 
-> 🔗 [https://multimedia-platform.onrender.com](https://multimedia-platform.onrender.com)
+> [https://multimedia-platform.onrender.com](https://multimedia-platform.onrender.com)
 
 ---
 
 ##  API Documentation (Swagger)
 
-> 🔗 [https://multimedia-platform.onrender.com/api-docs](https://multimedia-platform.onrender.com/api-docs)
+>  [https://multimedia-platform.onrender.com/api-docs](https://multimedia-platform.onrender.com/api-docs)
 
 Browse and test all available endpoints with Swagger UI.
+
+---
+
+## Postman Collection 
+> [Link](https://documenter.getpostman.com/view/46490544/2sB3BHkTqq)
 
 ---
 
